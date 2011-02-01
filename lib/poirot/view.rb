@@ -1,4 +1,4 @@
-module Walrus
+module Poirot
   class View < Mustache
 
     def initialize(view_context, template_source)

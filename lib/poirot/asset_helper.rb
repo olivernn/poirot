@@ -1,4 +1,4 @@
-module Walrus
+module Poirot
   module AssetHelper
     def template_include_tag(*sources)
       sources.collect do |source|

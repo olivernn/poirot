@@ -1,4 +1,4 @@
-# Walrus
+# Poirot
 
 ## Description
 
@@ -18,7 +18,7 @@ included, it should have the same name as the partial, but without the underscor
     app/views/posts/post_list_view.rb
     
     module Posts
-      class PostListView < Walrus::View
+      class PostListView < Poirot::View
         def foo
           "bar"
         end
@@ -51,7 +51,7 @@ type will be set as `text/mustache` and the id will be `post-list-template`.
 
 ## More
 
-An [example](http://github.com/olivernn/notepad) app using Walrus
+An [example](http://github.com/olivernn/notepad) app using Poirot
 
 ## Credits
 

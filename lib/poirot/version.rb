@@ -1,3 +1,3 @@
-module Walrus
+module Poirot
   VERSION = "0.0.1"
 end

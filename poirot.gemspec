@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "walrus/version"
+require "poirot/version"
 
 Gem::Specification.new do |s|
-  s.name        = "walrus"
-  s.version     = Walrus::VERSION
+  s.name        = "poirot"
+  s.version     = Poirot::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Oliver Nightingale", "Mark Evans"]
   s.email       = ["oliver.nightingale1@gmail.com"]
-  s.homepage    = "http://rubygems.org/gems/walrus"
+  s.homepage    = "http://rubygems.org/gems/poirot"
   s.summary     = %q{mustaches}
   s.description = %q{mustaches are cool}
 
-  s.rubyforge_project = "walrus"
+  s.rubyforge_project = "poirot"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

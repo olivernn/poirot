@@ -1,4 +1,4 @@
-module Walrus
+module Poirot
   class Handler < ActionView::Template::Handler
     include ActionView::Template::Handlers::Compilable
 
@@ -10,7 +10,7 @@ module Walrus
       view_class = begin
         view_path.classify.constantize
       rescue NameError => e
-        Walrus::View
+        Poirot::View
       end
       "#{view_class}.new(self, '#{template.source.gsub(/'/, "\\\\'")}').render.html_safe"
     end
