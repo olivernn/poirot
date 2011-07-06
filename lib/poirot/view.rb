@@ -35,6 +35,12 @@ module Poirot
         instance_variable_set(name, instance_var)
         self[name.tr('@','').to_sym] = instance_var
       end
+
+      @renderer.instance_variable_get("@locals").each do |name, val|
+        instance_variable_set("@#{name}", val)
+        self[name] = val
+      end
+
     end
   end
 end
