@@ -12,6 +12,9 @@ Gem::Specification.new do |s|
   s.summary     = %q{mustaches}
   s.description = %q{mustaches are cool}
 
+  s.add_dependency('rails', '>3')
+  s.add_dependency('mustache')
+
   s.rubyforge_project = "poirot"
 
   s.files         = `git ls-files`.split("\n")
