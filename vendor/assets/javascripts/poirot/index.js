@@ -1,0 +1,2 @@
+//= require ./mustache
+//= require ./poirot
