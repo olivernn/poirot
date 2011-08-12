@@ -36,11 +36,13 @@ module Poirot
         self[name.tr('@','').to_sym] = instance_var
       end
 
-      @renderer.instance_variable_get("@locals").each do |name, val|
+      # get the locals from the view context, is there a better way?
+      locals = view_context.send(:view_renderer).send(:_partial_renderer).instance_variable_get("@locals") || {}
+
+      locals.each do |name, val|
         instance_variable_set("@#{name}", val)
         self[name] = val
       end
-
     end
   end
 end
