@@ -3,7 +3,7 @@ module Poirot
     def template_include_tag(*sources)
       sources.collect do |source|
         template = File.open(_poirot_resolve_partial_path(source), "rb")
-        content_tag :script, template.read.html_safe, :type => "text/mustache", :id => "#{source.parameterize}-template"
+        content_tag :script, template.read.html_safe, :type => "text/mustache", :id => "#{source.parameterize.dasherize}-template"
       end.join("\n").html_safe
     end
     
