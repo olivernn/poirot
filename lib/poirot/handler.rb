@@ -6,6 +6,7 @@ module Poirot
       view_class = begin
         view_path.classify.constantize
       rescue NameError => e
+        Rails.logger.info ">>> #{e}"
         Poirot::View
       end
       "#{view_class}.new(self, '#{template.source.gsub(/'/, "\\\\'")}').render.html_safe"
