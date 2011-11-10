@@ -1,7 +1,14 @@
 var poirot = (function ($) {
 
+  var viewFactory = function (template, partials) {
+    return function (data) {
+      return $(Mustache.to_html(template, data, partials))
+    }
+  }
+
   var poirot = {
-    partials: {}
+    partials: {},
+    _viewFactory: viewFactory
   }
 
   $(document).ready(function () {
@@ -13,9 +20,7 @@ var poirot = (function ($) {
 
       poirot.partials[methodName] = template
 
-      poirot[methodName] = function (presenter) {
-        return $(Mustache.to_html(template, presenter, poirot.partials))
-      }
+      poirot[methodName] = poirot._viewFactory(template, poirot.partials)
     })
   })
 
