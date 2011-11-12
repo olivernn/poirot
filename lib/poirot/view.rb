@@ -16,6 +16,23 @@ module Poirot
       end
     end
 
+    def render_buffer(buffer)
+      self.render(buffer, context).html_safe
+    end
+
+    def include_partial(name)
+      path = ["app/views", controller_name]
+      path += name.split("/")
+      path.delete(nil)
+      path.last.replace("_#{path.last}.html.mustache")
+
+      filename = path.join("/")
+
+      Dir.chdir(Rails.root) do
+        render_buffer(File.read(filename))
+      end
+    end
+
     def method_missing(method_name, *args, &block)
       instance_var = instance_variable_get("@#{method_name}")
       if defined?(instance_var) && args.empty?
