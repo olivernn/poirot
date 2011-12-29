@@ -10,7 +10,7 @@ module Poirot
   class Engine < Rails::Engine ; end if Rails.version >= "3.1"
   class Railtie < Rails::Railtie
     config.before_configuration do |app|
-      app.config.autoload_paths += %W(#{app.config.root}/app/views)
+      app.config.autoload_paths += %W(#{app.config.root}/app/mustache)
     end
   end
 end

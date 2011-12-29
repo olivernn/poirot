@@ -3,15 +3,33 @@ module Poirot
 
     def initialize(view_context, template_source)
       @view_context = view_context
+      @params = view_context.params || {}
       self.template = template_source
       assign_variables!
     end
 
     def respond_to?(method_sym, include_private = false)
-      if view_context.respond_to?(method_sym) 
+      if view_context.respond_to?(method_sym)
         true
       else
         super
+      end
+    end
+
+    def render_buffer(buffer)
+      self.render(buffer, context).html_safe
+    end
+
+    def include_partial(name)
+      path = ["app/views", controller_name]
+      path += name.split("/")
+      path.delete(nil)
+      path.last.replace("_#{path.last}.html.mustache")
+
+      filename = path.join("/")
+
+      Dir.chdir(Rails.root) do
+        render_buffer(File.read(filename))
       end
     end
 
@@ -27,6 +45,7 @@ module Poirot
     private
 
     attr_reader :view_context
+    attr_reader :params
 
     def assign_variables!
       variables = view_context.instance_variable_names.select{|name| name =~ /^@[^_]/}
@@ -36,12 +55,14 @@ module Poirot
         self[name.tr('@','').to_sym] = instance_var
       end
 
-      # get the locals from the view context, is there a better way?
-      locals = view_context.send(:view_renderer).send(:_partial_renderer).instance_variable_get("@locals") || {}
+      if Rails.version >= "3.1"
+        # get the locals from the view context, is there a better way?
+        locals = view_context.send(:view_renderer).send(:_partial_renderer).instance_variable_get("@locals") || {}
 
-      locals.each do |name, val|
-        instance_variable_set("@#{name}", val)
-        self[name] = val
+        locals.each do |name, val|
+          instance_variable_set("@#{name}", val)
+          self[name] = val
+        end
       end
     end
   end
