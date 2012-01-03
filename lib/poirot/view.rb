@@ -8,6 +8,12 @@ module Poirot
       assign_variables!
     end
 
+    self.template_extension = 'html.mustache'
+
+    def self.inherited(view_class)
+      self.template_path = Rails.root.join('app', 'views', view_class.name.split('::').first.downcase)
+    end
+
     def respond_to?(method_sym, include_private = false)
       if view_context.respond_to?(method_sym)
         true
