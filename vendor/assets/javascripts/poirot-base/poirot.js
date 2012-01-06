@@ -7,7 +7,7 @@ var poirot = (function ($) {
   }
 
   var poirot = {
-    partials: {},
+    _partials: {},
     _viewFactory: viewFactory
   }
 
@@ -18,9 +18,9 @@ var poirot = (function ($) {
         return str.replace("-", "").toUpperCase()
       }).replace("Template", "")
 
-      poirot.partials[methodName] = template
+      poirot._partials[methodName] = template
 
-      poirot[methodName] = poirot._viewFactory(template, poirot.partials)
+      poirot[methodName] = poirot._viewFactory(template, poirot._partials)
     })
   })
 

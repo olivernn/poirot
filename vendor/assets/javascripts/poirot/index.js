@@ -1,2 +1,2 @@
-//= require ./mustache
-//= require ./poirot
+//= require poirot-base
+//= require poirot-mustache
