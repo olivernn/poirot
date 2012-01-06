@@ -46,7 +46,7 @@ type will be set as `text/mustache` and the id will be `post-list-template`.
 
 ### Javascript Helper
 
-Poirot also adds a javascript helper for using mustache templates from the browser.  In Rails 3.1 this will be automatically added to the asset pipeline.
+Poirot also adds a javascript helper for using mustache templates from the browser.  In Rails 3.1 this will be automatically added to the asset pipeline, you just need to add `//= require poirot` in your application.js file.
 
 If you are using rails 3 then you can run the `rails g poirot:install` to install the javascripts in your application.
 
@@ -61,6 +61,14 @@ You can render this template from javascript by doing the following
 This will return the contents of the `post_list` template wrapped in a jQuery object, ready for inserting into the dom.  If you have data to pass to the template then you can pass it as the argument to the function, e.g.
 
     poirot.postList({foo: "bar"})
+
+#### Using Handlebars.js
+
+It is possible to use handlebars instead of mustache when rendering templates client side.  To do this you need to first include the handlebars.js source.  The instead of including `//= require poirot` in the asset pipeline you should include `//= require poirot-handlebars`
+
+#### Using Hogan.js
+
+It is also possible to use hogan.js instead of mustache when rendering templates client side.  To do this you need to first include the hogan.js source.  The instead of including `//= require poirot` in the asset pipeline you should include `//= require poirot-hogan`
 
 ## Dependencies
 
