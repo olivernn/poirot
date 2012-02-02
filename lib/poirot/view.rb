@@ -40,9 +40,8 @@ module Poirot
     end
 
     def method_missing(method_name, *args, &block)
-      instance_var = instance_variable_get("@#{method_name}")
-      if defined?(instance_var) && args.empty?
-        instance_var
+      if instance_variable_names.include?("@#{method_name}") && args.empty?
+        instance_variable_get("@#{method_name}")
       else
         view_context.send(method_name,*args, &block)
       end
