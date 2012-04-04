@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Poirot by olivernn</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Poirot</h1>
+        <p>mustaches in your rails</p>
+        <p class="view"><a href="https://github.com/olivernn/poirot">View the Project on GitHub <small>olivernn/poirot</small></a></p>
+        <ul>
+          <li><a href="https://github.com/olivernn/poirot/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/olivernn/poirot/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/olivernn/poirot">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Poirot</h1>
+
+<h2>Description</h2>
+
+<p>Allows you to use <a href="http://mustache.github.com/">Mustache</a> template partials in Rails, also
+ads a helper method to easily allow JavaScript to re-use the same templates.</p>
+
+<h2>Usage</h2>
+
+<p>Create a partial just like you would with erb, prefixing the name with an underscore.</p>
+
+<pre><code>app/views/posts/_post_list.html.mustache
+</code></pre>
+
+<p>The template will have access to all normal rails helper methods and any instance variables
+that were set in the controller.  If you need more than this an optional view class can be
+included, it should have the same name as the partial, but without the underscore.</p>
+
+<pre><code>app/views/posts/post_list_view.rb
+
+module Posts
+  class PostListView &lt; Poirot::View
+    def foo
+      "bar"
+    end
+
+    def post_link
+      post_path(post)
+    end
+  end
+end
+</code></pre>
+
+<p>The view class has access to all the normal Rails helpers and access to the controller
+instance variables, e.g <a href="/post" class="user-mention">@post</a> becomes the method post.</p>
+
+<p>Also included is a simple view helper for including mustache templates in a page ready for
+use by JavaScript.</p>
+
+<pre><code>&lt;%= template_include_tag 'post_list' %&gt;
+</code></pre>
+
+<p>The above will insert a script tag with the contents of the partial called <code>post_list</code>, the 
+type will be set as <code>text/mustache</code> and the id will be <code>post-list-template</code>.</p>
+
+<pre><code>&lt;script id="post-list-template" type="text/mustache"&gt;
+  &lt;!-- template will be here! --&gt;
+&lt;/script&gt;
+</code></pre>
+
+<h3>Javascript Helper</h3>
+
+<p>Poirot also adds a javascript helper for using mustache templates from the browser.  In Rails 3.1 this will be automatically added to the asset pipeline, you just need to add <code>//= require poirot</code> in your application.js file.</p>
+
+<p>If you are using rails 3 then you can run the <code>rails g poirot:install</code> to install the javascripts in your application.</p>
+
+<p>Using the poirot javascript helper is simple, given a template added to the page using <code>template_include_tag</code></p>
+
+<pre><code>&lt;%= template_include_tag 'post_list' %&gt;
+</code></pre>
+
+<p>You can render this template from javascript by doing the following</p>
+
+<pre><code>poirot.postList()
+</code></pre>
+
+<p>This will return the contents of the <code>post_list</code> template wrapped in a jQuery object, ready for inserting into the dom.  If you have data to pass to the template then you can pass it as the argument to the function, e.g.</p>
+
+<pre><code>poirot.postList({foo: "bar"})
+</code></pre>
+
+<h4>Using Handlebars.js</h4>
+
+<p>It is possible to use handlebars instead of mustache when rendering templates client side.  To do this you need to first include the handlebars.js source.  The instead of including <code>//= require poirot</code> in the asset pipeline you should include <code>//= require poirot-handlebars</code></p>
+
+<h4>Using Hogan.js</h4>
+
+<p>It is also possible to use hogan.js instead of mustache when rendering templates client side.  To do this you need to first include the hogan.js source.  The instead of including <code>//= require poirot</code> in the asset pipeline you should include <code>//= require poirot-hogan</code></p>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li> Rails &gt;3.0.0</li>
+<li> Mustache</li>
+</ul><h2>More</h2>
+
+<p>An <a href="http://github.com/olivernn/notepad">example</a> app using Poirot</p>
+
+<h2>Credits</h2>
+
+<p><a href="http://github.com/markevans">Mark Evans</a> &amp; <a href="http://github.com/olivernn">Oliver Nightingale</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/olivernn">olivernn</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+  </body>
+</html>
