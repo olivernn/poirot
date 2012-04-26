@@ -1,6 +1,8 @@
 module Poirot
   class View < Mustache
 
+    include Poirot::ViewHelper
+
     def initialize(view_context, template_source)
       @view_context = view_context
       @params = view_context.params || {}

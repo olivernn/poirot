@@ -1,5 +1,6 @@
 require 'mustache'
 require 'poirot/handler'
+require 'poirot/view_helper'
 require 'poirot/view'
 require 'poirot/asset_helper'
 
