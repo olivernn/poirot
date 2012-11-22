@@ -21,7 +21,8 @@ var poirot = (function ($) {
 
   var poirot = {
     _partials: {},
-    _viewFactory: viewFactory
+    _viewFactory: viewFactory,
+    grabTemplates: grabTemplates
   }
 
   $(document).ready(function () {
