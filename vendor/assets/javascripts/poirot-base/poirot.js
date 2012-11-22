@@ -6,12 +6,7 @@ var poirot = (function ($) {
     }
   }
 
-  var poirot = {
-    _partials: {},
-    _viewFactory: viewFactory
-  }
-
-  $(document).ready(function () {
+  var grabTemplates = function () {
     $('script[type="text/mustache"]').each(function () {
       var template = $(this).html()
       var methodName = this.id.replace(/-([a-z])/g, function (str) {
@@ -22,6 +17,15 @@ var poirot = (function ($) {
 
       poirot[methodName] = poirot._viewFactory(template, poirot._partials)
     })
+  }
+
+  var poirot = {
+    _partials: {},
+    _viewFactory: viewFactory
+  }
+
+  $(document).ready(function () {
+    grabTemplates()
   })
 
   return poirot
