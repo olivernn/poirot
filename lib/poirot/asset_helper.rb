@@ -23,14 +23,10 @@ module Poirot
 
     def resolve_partial_path(source)
       if is_absolute_path?(source)
-        if source.starts_with? "app/views"
-          source
-        else
-          segments = source.to_s.split('/')
-          partial_name = "_#{segments.pop}.html.mustache"
-          segments << partial_name
-          Rails.root.join('app/views', *segments)
-        end
+        segments = source.to_s.split('/')
+        partial_name = "_#{segments.pop}.html.mustache"
+        segments << partial_name
+        Rails.root.join('app/views', *segments)
       else
         Rails.root.join('app/views', controller_name, "_#{source}.html.mustache")
       end
