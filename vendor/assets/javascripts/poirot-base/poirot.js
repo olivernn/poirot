@@ -17,8 +17,11 @@ var poirot = (function ($) {
       var methodName = this.id.replace(/-([a-z])/g, function (str) {
         return str.replace("-", "").toUpperCase()
       }).replace("Template", "")
+      var partialName = "_" + this.id.replace(/-([a-z])/g, function (str) {
+        return str.replace("-", "_")
+      }).replace("_template", "")
 
-      poirot._partials[methodName] = template
+      poirot._partials[partialName] = template
 
       poirot[methodName] = poirot._viewFactory(template, poirot._partials)
     })
