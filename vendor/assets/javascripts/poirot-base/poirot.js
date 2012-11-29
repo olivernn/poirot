@@ -21,6 +21,7 @@ var poirot = (function ($) {
         return str.replace("-", "_")
       }).replace("_template", "")
 
+      poirot._partials[methodName] = template
       poirot._partials[partialName] = template
 
       poirot[methodName] = poirot._viewFactory(template, poirot._partials)
