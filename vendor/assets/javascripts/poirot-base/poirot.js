@@ -2,7 +2,7 @@ var poirot = (function ($) {
 
   var viewFactory = function (template, partials) {
     return function (data) {
-      return $(Mustache.to_html(template, data, partials))
+      return $($.parseHTML(Mustache.to_html(template, data, partials)))
     }
   }
 
